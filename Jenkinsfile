@@ -3,12 +3,13 @@ pipeline {
 
     tools {
         maven 'Maven'
-        jdk 'JDK'
+        jdk 'JDK21'
     }
 
     stages {
         stage('Build') {
             steps {
+                bat 'mvn -version'
                 bat 'mvn clean package'
             }
         }
