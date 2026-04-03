@@ -1,28 +1,15 @@
 pipeline {
     agent any
 
-    stages {
-        stage('Clone') {
-            steps {
-                echo 'Cloning source code from GitHub...'
-            }
-        }
+    tools {
+        maven 'Maven'
+        jdk 'JDK'
+    }
 
+    stages {
         stage('Build') {
             steps {
-                echo 'Building project...'
-            }
-        }
-
-        stage('Test') {
-            steps {
-                echo 'Testing project...'
-            }
-        }
-
-        stage('Deploy') {
-            steps {
-                echo 'Deploying project...'
+                bat 'mvn clean package'
             }
         }
     }
