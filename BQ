@@ -1,0 +1,67 @@
+1) Gợi ý chọn phạm vi (scope) vừa đủ để làm đồ án
+In-scope (khuyến nghị)
+
+POS bán hàng: tạo hóa đơn, thêm món, ghi chú (ít đá/ít đường), tách/gộp hóa đơn
+Quản lý bàn: mở bàn, chuyển bàn, trạng thái bàn (trống/đang phục vụ/đã đặt)
+Quy trình order → pha chế/bar → phục vụ → thanh toán
+Khuyến mãi/giảm giá (theo % hoặc theo hóa đơn)
+Quản lý menu (món, size, topping, giá)
+Quản lý nhân viên & phân quyền (Thu ngân / Phục vụ / Quản lý)
+Báo cáo doanh thu theo ngày/tháng, top món bán chạy
+Out-of-scope (ghi rõ để tránh quá tải)
+
+Tích hợp thanh toán thật (VNPay/MoMo), hóa đơn điện tử
+Tính lương tự động phức tạp, CRM nâng cao
+2) Actors (vai trò) chuẩn trong quán cafe
+Thu ngân (Cashier): tạo hóa đơn, nhận thanh toán, in hóa đơn
+Phục vụ (Waiter): mở bàn, tạo order, chuyển bàn, cập nhật trạng thái phục vụ
+Barista/Bếp: nhận ticket món, cập nhật “đang làm/đã xong”
+Quản lý (Manager/Admin): menu, giá, khuyến mãi, nhân sự, báo cáo, kho
+3) Business Requirements mẫu (bạn có thể đưa vào BRD ngay)
+Viết dạng mã BR-xx:
+
+BR-01 Quản lý người dùng & phân quyền
+Hệ thống phải hỗ trợ tài khoản nhân viên và phân quyền theo vai trò (Cashier/Waiter/Barista/Manager).
+
+BR-02 Quản lý bàn & trạng thái bàn
+Hệ thống phải cho phép mở bàn, chuyển bàn, gộp/tách bàn và hiển thị trạng thái bàn theo thời gian thực.
+
+BR-03 Tạo order theo bàn / mang đi
+Nhân viên phải tạo được order theo bàn hoặc “take-away”, kèm ghi chú (ít đá/ít đường, topping).
+
+BR-04 Luồng xử lý món (bar/bếp)
+Mỗi món trong order có trạng thái: New → InProgress → Ready → Served/Cancelled; barista cập nhật trạng thái để phục vụ nhận món.
+
+BR-05 Quản lý hóa đơn & thanh toán
+Thu ngân phải thanh toán được theo tiền mặt/chuyển khoản (mô phỏng), áp dụng giảm giá, tính thuế/phí (nếu có), và kết thúc hóa đơn.
+
+BR-06 Tách/gộp hóa đơn
+Hệ thống phải hỗ trợ tách món ra nhiều hóa đơn (chia tiền) và gộp các hóa đơn (khi khách đổi bàn/ghép nhóm).
+
+BR-07 Quản lý menu & giá bán
+Quản lý có thể thêm/sửa/xóa món, size, topping, giá; ngừng bán món theo ngày/giờ.
+
+BR-08 Quản lý khuyến mãi
+Hệ thống phải hỗ trợ tạo chương trình giảm giá theo thời gian, theo nhóm món hoặc theo hóa đơn, và ghi nhận vào hóa đơn.
+
+BR-09 Quản lý kho nguyên liệu (mức cơ bản)
+Hệ thống phải lưu nguyên liệu, tồn kho, nhập kho; khi bán món có thể trừ kho theo định mức (có thể làm đơn giản).
+
+BR-10 Báo cáo & thống kê
+Quản lý xem được doanh thu theo ngày/tháng, số hóa đơn, top món bán chạy, doanh thu theo nhân viên/ca.
+
+BR-11 Nhật ký hoạt động (audit log)
+Hệ thống ghi nhận thao tác quan trọng: đổi giá, hủy món, hủy hóa đơn, giảm giá—kèm người thực hiện và thời điểm.
+
+4) Dữ liệu cốt lõi (để bạn vẽ ERD/Database)
+User, Role
+Table (bàn), TableStatus
+Product (món), Category, Topping/Option, Price
+Order, OrderItem (món trong order), ItemNote, ItemStatus
+Invoice/Payment (phương thức, số tiền)
+Promotion/Discount
+InventoryItem, StockIn (phiếu nhập), Recipe (định mức) (tuỳ chọn)
+5) 3 câu hỏi để mình “đóng gói” BRD đúng ý bạn
+Bạn làm quán cafe có bàn hay chỉ take-away?
+Bạn muốn có kho nguyên liệu không (hay chỉ POS + báo cáo)?
+Làm web hay mobile, và có cần đa chi nhánh không?
